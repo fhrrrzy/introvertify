@@ -90,23 +90,30 @@ class SkyAccount:
         return blocked_friend_uuids
 
     def set_all_friends_blocked(self, set_block):
-        friend_uuids = self.get_all_friends()
+        while True:
+            friend_uuids = self.get_all_friends()
 
-        # Set the name of each friend to a random name before blocking
-        with tqdm(total=len(friend_uuids), desc="Setting names and blocking friends", unit="friend") as pbar:
-            for friend_uuid in friend_uuids:
-                self.set_friend_name(friend_uuid)
-                self.set_friend_block(friend_uuid, set_block)
-                pbar.update(1)
+            if not friend_uuids:
+                break
+
+            with tqdm(total=len(friend_uuids), desc=f"{'Blocking' if set_block else 'Unblocking'} friends", unit="friend") as pbar:
+                for friend_uuid in friend_uuids:
+                    # Set the name of each friend to a random name before blocking
+                    self.set_friend_name(friend_uuid)
+                    self.set_friend_block(friend_uuid, set_block)
+                    pbar.update(1)
 
     def set_all_blocked_friends_unblocked(self):
-        blocked_friend_uuids = self.get_all_blocked_friends()
+        while True:
+            blocked_friend_uuids = self.get_all_blocked_friends()
 
-        # Unblock each blocked friend
-        with tqdm(total=len(blocked_friend_uuids), desc="Unblocking friends", unit="friend") as pbar:
-            for blocked_friend_uuid in blocked_friend_uuids:
-                self.set_friend_block(blocked_friend_uuid, False)
-                pbar.update(1)
+            if not blocked_friend_uuids:
+                break
+
+            with tqdm(total=len(blocked_friend_uuids), desc="Unblocking friends", unit="friend") as pbar:
+                for blocked_friend_uuid in blocked_friend_uuids:
+                    self.set_friend_block(blocked_friend_uuid, False)
+                    pbar.update(1)
 
     def set_friend_block(self, target_id, set_block):
         url = 'https://live.radiance.thatgamecompany.com/account/set_friend_block'
