@@ -26,7 +26,7 @@ class LoginHandler():
         return userid, sesiones
 
 
-    def lua_handler(code):
+    def lua_handler(self, code):
         print(code)
         valor1 = list(base64.b64decode(code))
         def des(cadena):

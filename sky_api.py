@@ -3,6 +3,8 @@ import json
 import re
 from random import choices
 from string import ascii_uppercase
+from rich import print
+from tqdm import tqdm
 
 class SkyAccount:
     def __init__(self, user_id, session):
@@ -57,7 +59,7 @@ class SkyAccount:
                     find_uuids(item)
 
         find_uuids(response_json)
-        return uuids
+        return set(uuids)
 
     def get_all_friends(self):
         url = 'https://live.radiance.thatgamecompany.com/account/get_friend_statues'
@@ -77,26 +79,34 @@ class SkyAccount:
             "user": self.user_id,
             "user_id": self.user_id,
             "session": self.session,
-            "page_max": 100,
+            "page_max": 1000,
             "page_offset": 0
         }
 
         response = self.make_post_request(url, body)
         response_json = json.loads(response.text)
+        # print(response_json)
         blocked_friend_uuids = self.find_uuids_in_response(response_json)
         return blocked_friend_uuids
 
     def set_all_friends_blocked(self, set_block):
         friend_uuids = self.get_all_friends()
 
-        for friend_uuid in friend_uuids:
-            self.set_friend_block(friend_uuid, set_block)
+        # Set the name of each friend to a random name before blocking
+        with tqdm(total=len(friend_uuids), desc="Setting names and blocking friends", unit="friend") as pbar:
+            for friend_uuid in friend_uuids:
+                self.set_friend_name(friend_uuid)
+                self.set_friend_block(friend_uuid, set_block)
+                pbar.update(1)
 
     def set_all_blocked_friends_unblocked(self):
         blocked_friend_uuids = self.get_all_blocked_friends()
 
-        for blocked_friend_uuid in blocked_friend_uuids:
-            self.set_friend_block(blocked_friend_uuid, False)
+        # Unblock each blocked friend
+        with tqdm(total=len(blocked_friend_uuids), desc="Unblocking friends", unit="friend") as pbar:
+            for blocked_friend_uuid in blocked_friend_uuids:
+                self.set_friend_block(blocked_friend_uuid, False)
+                pbar.update(1)
 
     def set_friend_block(self, target_id, set_block):
         url = 'https://live.radiance.thatgamecompany.com/account/set_friend_block'
