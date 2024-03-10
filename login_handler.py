@@ -17,6 +17,7 @@ class LoginHandler():
         datos_user = {"type":"Nintendo","external_credentials":{"external_account_type":"Nintendo","player_id":f"{id}","key_url":"","signature":f"{signature}","salt":"","timestamp":0,"alias":""},"user":"00000000-0000-0000-0000-000000000000","device":"00000000-0000-0000-0000-000000000000","key":"0000000000000000000000000000000000000000000000000000000000000000","device_name":"M2012K11AI","device_token":"cKN45n7UTSKHNoyzdugWNE:APA91bFg8MGDK26uj-RjRrRSANDGST4AqE29kh3ygCzN0IZWLgGis2K16aD9JoYXnaRBD2LgghA18Bc0ZG76AuWEzr3eAMTSRen8SsBPjtPftUVnuXECrjVfhd9z_WeDbx9MaHUO7GS9","production":True,"tos_version":4,"device_key":"AzsVI0WrO7ogCD1XQc4x7UP8NFvWkgprHKr9Dy3EldUs","sig_ts":1654180945,"sig":"MEQCIAMQ36cVdxjL+/jCGsfKmjhtEQVZFMIW2ICzHzhuADhbAiAlDdhjLkrxVTPer/EPmeIOqrU8f5yJyBCmsBaqw6pFxQ==","hashes":[1135420871,4291554428,1662465570,2939294528,2864712656,784335679,1246829562,4147059363,191933768,3062676827,3931787622,2766223387,576746911,2275726205,1729690551,2495669098,2669125820,495611257,1810499009,3661381049,943977965,3914553296,2198427157,1330181820],"integrity":True}
         info = requests.post('https://live.radiance.thatgamecompany.com/account/auth/login', headers=self.get_headers(), json=datos_user).text
         x = json.loads(info)
+        print(x)
         if "result" in x:
             sesiones = x["result"]
             userid = x["result"]
@@ -50,7 +51,7 @@ class LoginHandler():
     def get_headers(self):
         return {
             'Host': 'live.radiance.thatgamecompany.com',
-            'User-Agent': 'Sky-Live-com.tgc.sky.android/0.24.5.246913 (Xiaomi MI 9; android 29.0.0; es)',
+            'User-Agent': 'Sky-Live-com.tgc.sky.android/0.24.6.250008 (Xiaomi MI 9; android 29.0.0; es)',
             'X-Session-ID': 'aeee648a-ea1f-4700-b970-ebe955750601',
             'x-sky-install-source': 'com.android.vending',
             'Content-type': 'application/json'
