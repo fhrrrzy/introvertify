@@ -6,6 +6,7 @@ def get_user_credentials():
     print("Login methods:")
     print("1. Nintendo")
     print("2. Lua Code")
+    print("3. Google Code")
 
     login_method = input("Select a login method (1 or 2): ")
 
@@ -18,8 +19,13 @@ def get_user_credentials():
         lua_code = input("Enter Lua code: ")
         login_handler = LoginHandler(login_method)
         user_id, session = login_handler.lua_handler(lua_code)
+    elif login_method == "3":
+        nintendo_id = input("Enter Google player code: ")
+
+        login_handler = LoginHandler(login_method)
+        user_id, session = login_handler.login_google(nintendo_id)
     else:
-        print("Invalid login method. Please select 1 or 2.")
+        print("Invalid login method. Please select 1, 2, or 3.")
         return None, None
 
     return user_id, session
@@ -42,6 +48,10 @@ def execute_user_option(option, sky_account):
         # Test set_all_blocked_friends_unblocked
         sky_account.set_all_blocked_friends_unblocked()
         print("All blocked friends unblocked successfully!")
+    elif option == 5:
+        # Test set_all_blocked_friends_unblocked
+        sky_account.get_iap_list()
+        print("All blocked friends unblocked successfully!")
     else:
         print("Invalid option. Please select a valid option.")
 
@@ -58,6 +68,7 @@ def features():
         print("2. Get all blocked friends")
         print("3. Block all friends")
         print("4. Unblock all blocked friends")
+        print("5. List iap")
 
         selected_option = int(input("Select an option (1-4): "))
 

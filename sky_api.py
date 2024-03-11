@@ -72,6 +72,25 @@ class SkyAccount:
         response_json = json.loads(response.text)
         friend_uuids = self.find_uuids_in_response(response_json)
         return friend_uuids
+    
+    def get_iap_list(self):
+        url = 'https://live.radiance.thatgamecompany.com/account/iaplist'
+        body = {
+            "user": self.user_id,
+            "user_id": self.user_id,
+            "session": self.session,
+            'platform': 'google',
+            'country': 'US',
+        }
+
+        response = self.make_post_request(url, body)
+        print(response)
+        response_json = json.loads(response.text)
+        # store response to a file named iaplist.json
+        with open('iaplist.json', 'w') as f:
+            json.dump(response_json, f)
+        print(response_json)
+        # return friend_uuids
 
     def get_all_blocked_friends(self):
         url = 'https://live.radiance.thatgamecompany.com/account/get_blocked_friends'
