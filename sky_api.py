@@ -14,7 +14,7 @@ class SkyAccount:
     def get_headers(self):
         return {
             'Host': 'live.radiance.thatgamecompany.com',
-            'User-Agent': 'Sky-Live-com.tgc.sky.android/0.24.6.250008 (Xiaomi MI 9; android 29.0.0; es)',
+            'User-Agent': 'Sky-Live-com.tgc.sky.android/0.24.7.251245 (Xiaomi MI 9; android 29.0.0; es)',
             'X-Session-ID': self.session,
             'user-id': self.user_id,
             'session': self.session,
