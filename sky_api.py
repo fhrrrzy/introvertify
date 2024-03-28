@@ -5,6 +5,7 @@ from random import choices
 from string import ascii_uppercase
 from rich import print
 from tqdm import tqdm
+from  sky_version import get_version as sky_version
 
 class SkyAccount:
     def __init__(self, user_id, session):
@@ -14,7 +15,7 @@ class SkyAccount:
     def get_headers(self):
         return {
             'Host': 'live.radiance.thatgamecompany.com',
-            'User-Agent': 'Sky-Live-com.tgc.sky.android/0.24.7.251245 (Xiaomi MI 9; android 29.0.0; es)',
+            'User-Agent': f'Sky-Live-com.tgc.sky.android/{sky_version()} (Xiaomi MI 9; android 29.0.0; es)',
             'X-Session-ID': self.session,
             'user-id': self.user_id,
             'session': self.session,
@@ -84,12 +85,11 @@ class SkyAccount:
         }
 
         response = self.make_post_request(url, body)
-        print(response)
         response_json = json.loads(response.text)
         # store response to a file named iaplist.json
-        with open('iaplist.json', 'w') as f:
-            json.dump(response_json, f)
-        print(response_json)
+        # with open('iaplist.json', 'w') as f:
+        #     json.dump(response_json, f)
+        print(response_json.purchased_non_consumables)
         # return friend_uuids
 
     def get_all_blocked_friends(self):

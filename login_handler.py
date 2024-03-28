@@ -2,6 +2,7 @@ import base64
 import json
 import requests
 from rich import print
+from  sky_version import get_version as sky_version
 
 class LoginHandler():
     
@@ -49,9 +50,10 @@ class LoginHandler():
         return var['uid'],var['session']
 
     def get_headers(self):
+        print(sky_version())
         return {
             'Host': 'live.radiance.thatgamecompany.com',
-            'User-Agent': 'Sky-Live-com.tgc.sky.android/0.24.7.251245 (Xiaomi MI 9; android 29.0.0; es)',
+            'User-Agent': f'Sky-Live-com.tgc.sky.android/{sky_version()} (Xiaomi MI 9; android 29.0.0; es)',
             'X-Session-ID': 'aeee648a-ea1f-4700-b970-ebe955750601',
             'x-sky-install-source': 'com.android.vending',
             'Content-type': 'application/json'

@@ -8,6 +8,7 @@ def get_user_credentials():
     print("2. Lua Code")
     print("3. Google Code")
 
+
     login_method = input("Select a login method (1 or 2): ")
 
     if login_method == "1":
