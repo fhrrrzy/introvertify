@@ -52,7 +52,7 @@ def execute_user_option(option, sky_account):
     elif option == 5:
         # Test set_all_blocked_friends_unblocked
         sky_account.get_iap_list()
-        print("All blocked friends unblocked successfully!")
+        # print("All blocked friends unblocked successfully!")
     else:
         print("Invalid option. Please select a valid option.")
 

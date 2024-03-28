@@ -86,11 +86,39 @@ class SkyAccount:
 
         response = self.make_post_request(url, body)
         response_json = json.loads(response.text)
-        # store response to a file named iaplist.json
-        # with open('iaplist.json', 'w') as f:
-        #     json.dump(response_json, f)
-        print(response_json.purchased_non_consumables)
-        # return friend_uuids
+        # Load iaplist.json
+        with open('iaplist.json') as f:
+            iap_list = json.load(f)
+
+        # Assuming response_json['purchased_non_consumables'] contains a list of IAP codes
+        iap_codes = response_json['purchased_non_consumables']
+        iap_codes = [item['product_id'] for item in iap_codes]
+
+        # List to store the values
+        iap_values = []
+
+        # Loop through each IAP code
+        for iap_code in iap_codes:
+            # Initialize value to None
+            value = None
+            # Check if the IAP code exists directly in iaplist.json
+            if iap_code in iap_list:
+                value = iap_list[iap_code]
+            else:
+                # Check if the IAP code starts with 'NC'
+                if iap_code.startswith('NC'):
+                    # Construct the corresponding 'SNC' code
+                    snc_code = 'SNC' + iap_code[2:]
+                    # Check if the 'SNC' code exists in iaplist.json
+                    if snc_code in iap_list:
+                        value = iap_list[snc_code]
+            # Append the value to iap_values
+            iap_values.append(value)
+
+
+        # Print the list of values
+        for i in iap_values:
+            print(f"- {i}")
 
     def get_all_blocked_friends(self):
         url = 'https://live.radiance.thatgamecompany.com/account/get_blocked_friends'
