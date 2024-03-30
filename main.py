@@ -1,6 +1,7 @@
 from sky_api import SkyAccount
 from login_handler import LoginHandler
 from rich import print
+import pyperclip
 
 def get_user_credentials():
     print("Login methods:")
@@ -12,6 +13,10 @@ def get_user_credentials():
     login_method = input("Select a login method (1 or 2): ")
 
     if login_method == "1":
+        #copy this link to user clipboard 
+        pyperclip.copy("https://live.radiance.thatgamecompany.com/account/auth/oauth_signin?type=Nintendo&token=")
+        print("Link copied to clipboard")
+
         nintendo_id = input("Enter Nintendo player code: ")
 
         login_handler = LoginHandler(login_method)
@@ -21,6 +26,8 @@ def get_user_credentials():
         login_handler = LoginHandler(login_method)
         user_id, session = login_handler.lua_handler(lua_code)
     elif login_method == "3":
+        pyperclip.copy("https://live.radiance.thatgamecompany.com/account/auth/oauth_signin?type=Google&token=")
+        print("Link copied to clipboard")
         nintendo_id = input("Enter Google player code: ")
 
         login_handler = LoginHandler(login_method)
@@ -52,7 +59,6 @@ def execute_user_option(option, sky_account):
     elif option == 5:
         # Test set_all_blocked_friends_unblocked
         sky_account.get_iap_list()
-        # print("All blocked friends unblocked successfully!")
     else:
         print("Invalid option. Please select a valid option.")
 
@@ -71,7 +77,7 @@ def features():
         print("4. Unblock all blocked friends")
         print("5. List iap")
 
-        selected_option = int(input("Select an option (1-4): "))
+        selected_option = int(input("Select an option (1-5): "))
 
         # Execute the selected option
         execute_user_option(selected_option, sky_account)

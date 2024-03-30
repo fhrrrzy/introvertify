@@ -6,7 +6,7 @@ from string import ascii_uppercase
 from rich import print
 from tqdm import tqdm
 from  sky_version import get_version as sky_version
-
+import pyperclip
 class SkyAccount:
     def __init__(self, user_id, session):
         self.user_id = user_id
@@ -115,10 +115,16 @@ class SkyAccount:
             # Append the value to iap_values
             iap_values.append(value)
 
+        text = ''
 
         # Print the list of values
         for i in iap_values:
-            print(f"- {i}")
+            text = text + f"- {i} \n"
+
+        pyperclip.copy(text)
+        print(text)
+        print("IAP list copied to clipboard")
+        
 
     def get_all_blocked_friends(self):
         url = 'https://live.radiance.thatgamecompany.com/account/get_blocked_friends'
