@@ -26,10 +26,10 @@ def get_user_credentials():
         7. Playstation
 ''')
 
-    login_method = input("Select a login method (1 - 6): ")
+    login_method = input("Select a login method (1 - 7): ")
 
     if login_method not in login_type:
-        print("Invalid login method. Please select 1 - 6.")
+        print("Invalid login method. Please select 1 - 7.")
         return None, None
     elif login_method == '2':
         lua_code = input("Enter Lua code: ")
