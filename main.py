@@ -1,7 +1,7 @@
 from sky_api import SkyAccount
 from login_handler import LoginHandler
 from rich import print
-import pyperclip
+# import pyperclip
 
 def get_user_credentials():
     print("Login methods:")
@@ -14,7 +14,7 @@ def get_user_credentials():
 
     if login_method == "1":
         #copy this link to user clipboard 
-        pyperclip.copy("https://live.radiance.thatgamecompany.com/account/auth/oauth_signin?type=Nintendo&token=")
+        # pyperclip.copy("https://live.radiance.thatgamecompany.com/account/auth/oauth_signin?type=Nintendo&token=")
         print("Link copied to clipboard")
 
         nintendo_id = input("Enter Nintendo player code: ")
@@ -26,7 +26,7 @@ def get_user_credentials():
         login_handler = LoginHandler(login_method)
         user_id, session = login_handler.lua_handler(lua_code)
     elif login_method == "3":
-        pyperclip.copy("https://live.radiance.thatgamecompany.com/account/auth/oauth_signin?type=Google&token=")
+        # pyperclip.copy("https://live.radiance.thatgamecompany.com/account/auth/oauth_signin?type=Google&token=")
         print("Link copied to clipboard")
         nintendo_id = input("Enter Google player code: ")
 

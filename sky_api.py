@@ -6,7 +6,7 @@ from string import ascii_uppercase
 from rich import print
 from tqdm import tqdm
 from  sky_version import get_version as sky_version
-import pyperclip
+# import pyperclip
 class SkyAccount:
     def __init__(self, user_id, session):
         self.user_id = user_id
@@ -121,7 +121,7 @@ class SkyAccount:
         for i in iap_values:
             text = text + f"- {i} \n"
 
-        pyperclip.copy(text)
+        # pyperclip.copy(text)
         print(text)
         print("IAP list copied to clipboard")
         
