@@ -15,7 +15,7 @@ def get_user_credentials():
     if login_method == "1":
         #copy this link to user clipboard 
         # pyperclip.copy("https://live.radiance.thatgamecompany.com/account/auth/oauth_signin?type=Nintendo&token=")
-        print("Link copied to clipboard")
+        print("https://live.radiance.thatgamecompany.com/account/auth/oauth_signin?type=Nintendo&token=")
 
         nintendo_id = input("Enter Nintendo player code: ")
 
@@ -27,7 +27,7 @@ def get_user_credentials():
         user_id, session = login_handler.lua_handler(lua_code)
     elif login_method == "3":
         # pyperclip.copy("https://live.radiance.thatgamecompany.com/account/auth/oauth_signin?type=Google&token=")
-        print("Link copied to clipboard")
+        print("https://live.radiance.thatgamecompany.com/account/auth/oauth_signin?type=Google&token=")
         nintendo_id = input("Enter Google player code: ")
 
         login_handler = LoginHandler(login_method)
