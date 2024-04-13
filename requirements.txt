@@ -1,0 +1,5 @@
+pyperclip
+rich
+tqdm
+requests
+beautifulsoup4
