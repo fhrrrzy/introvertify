@@ -33,14 +33,14 @@ def get_user_credentials():
         return None, None
     elif login_method == '2':
         lua_code = input("Enter Lua code: ")
-        login_handler = LoginHandler(login_method)
+        login_handler = LoginHandler(login_type[login_method])
         user_id, session = login_handler.lua_handler(lua_code)
     else:
         print(f"Copy this link to your clipboard: https://live.radiance.thatgamecompany.com/account/auth/oauth_signin?type={login_type[login_method]}&token=")
         code = input("Enter the code: ")
         print(code)
 
-        login_handler = LoginHandler(login_method)
+        login_handler = LoginHandler(login_type[login_method])
         user_id, session = login_handler.login(code)
     
     print(user_id,session)
