@@ -114,7 +114,7 @@ class SkyAccount:
                     if snc_code in iap_list:
                         value = iap_list[snc_code]
             # Append the value to iap_values
-            print(f"{iap_code} - {value}")
+            # print(f"{iap_code} - {value}")
             iap_values.append(value)
 
         text = ''
