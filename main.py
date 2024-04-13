@@ -10,7 +10,8 @@ def get_user_credentials():
         '3': 'Google Code',
         '4': 'Steam',
         '5': 'Huawei',
-        '6': 'Facebook'
+        '6': 'Facebook',
+        '7': 'Sony'
     }
 
     print('''
@@ -22,6 +23,7 @@ def get_user_credentials():
         4. Steam
         5. Huawei
         6. Facebook
+        7. Playstation
 ''')
 
     login_method = input("Select a login method (1 - 6): ")
