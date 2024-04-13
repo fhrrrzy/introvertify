@@ -4,39 +4,46 @@ from rich import print
 # import pyperclip
 
 def get_user_credentials():
-    print("Login methods:")
-    print("1. Nintendo")
-    print("2. Lua Code")
-    print("3. Google Code")
+    login_type = {
+        '1': 'Nintendo',
+        '2': 'Lua Code',
+        '3': 'Google Code',
+        '4': 'Steam',
+        '5': 'Huawei',
+        '6': 'Facebook'
+    }
 
+    print('''
+    Login Methods:
+    -----------------------      
+        1. Nintendo
+        2. Lua Code
+        3. Google Code
+        4. Steam
+        5. Huawei
+        6. Facebook
+''')
 
-    login_method = input("Select a login method (1 or 2): ")
+    login_method = input("Select a login method (1 - 6): ")
 
-    if login_method == "1":
-        #copy this link to user clipboard 
-        # pyperclip.copy("https://live.radiance.thatgamecompany.com/account/auth/oauth_signin?type=Nintendo&token=")
-        print("https://live.radiance.thatgamecompany.com/account/auth/oauth_signin?type=Nintendo&token=")
-
-        nintendo_id = input("Enter Nintendo player code: ")
-
-        login_handler = LoginHandler(login_method)
-        user_id, session = login_handler.login_nintendo(nintendo_id)
-    elif login_method == "2":
+    if login_method not in login_type:
+        print("Invalid login method. Please select 1 - 6.")
+        return None, None
+    elif login_method == '2':
         lua_code = input("Enter Lua code: ")
         login_handler = LoginHandler(login_method)
         user_id, session = login_handler.lua_handler(lua_code)
-    elif login_method == "3":
-        # pyperclip.copy("https://live.radiance.thatgamecompany.com/account/auth/oauth_signin?type=Google&token=")
-        print("https://live.radiance.thatgamecompany.com/account/auth/oauth_signin?type=Google&token=")
-        nintendo_id = input("Enter Google player code: ")
+    else:
+        print(f"Copy this link to your clipboard: https://live.radiance.thatgamecompany.com/account/auth/oauth_signin?type={login_type[login_method]}&token=")
+        code = input("Enter the code: ")
+        print(code)
 
         login_handler = LoginHandler(login_method)
-        user_id, session = login_handler.login_google(nintendo_id)
-    else:
-        print("Invalid login method. Please select 1, 2, or 3.")
-        return None, None
-
+        user_id, session = login_handler.login(code)
+    
+    print(user_id,session)
     return user_id, session
+
 
 def execute_user_option(option, sky_account):
     if option == 1:

@@ -99,6 +99,7 @@ class SkyAccount:
 
         # Loop through each IAP code
         for iap_code in iap_codes:
+            
             # Initialize value to None
             value = None
             # Check if the IAP code exists directly in iaplist.json
@@ -113,6 +114,7 @@ class SkyAccount:
                     if snc_code in iap_list:
                         value = iap_list[snc_code]
             # Append the value to iap_values
+            print(f"{iap_code} - {value}")
             iap_values.append(value)
 
         text = ''
